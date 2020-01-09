@@ -2,9 +2,15 @@
 
 > A practice TODO list
 
+# Next Steps
+
+- [ ] utilize async browser storage
+  - Reference https://codesandbox.io/s/q8ml8y9w9w
+- [ ] add e2e tests
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

@@ -17,7 +17,8 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@vue/composition-api": "^0.3.4",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-idb": "^0.2.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.3.10",
