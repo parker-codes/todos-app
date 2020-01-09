@@ -24,7 +24,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['node_modules/css.gg/icons-compressed/icons.css'],
   /*
    ** Plugins to load before mounting the App
    */

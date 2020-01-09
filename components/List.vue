@@ -6,16 +6,25 @@
           class="mb-2 flex justify-between"
           :class="{ 'line-through text-gray-700': item.completed }"
         >
-          <div>
-            <button @click="toggleComplete(item.id)" class="mr-2">
-              <CheckboxSvg classes="w-4 h-4" :disabled="!item.completed" />
+          <div class="flex">
+            <button @click="toggleComplete(item.id)" class="mr-2 h-full">
+              <CheckboxIcon
+                size="small"
+                :classes="[
+                  { 'hover:text-green-700': !item.completed },
+                  {
+                    'text-green-700 bg-green-400 hover:bg-transparent':
+                      item.completed
+                  }
+                ]"
+              />
             </button>
 
             <span>{{ item.title }}</span>
           </div>
 
           <button @click="removeItem(item.id)" class="ml-2">
-            <TrashSvg classes="w-4 h-4" />
+            <TrashIcon size="small" classes="hover:text-red-500" />
           </button>
         </div>
       </div>
@@ -25,8 +34,8 @@
 
 <script lang="ts">
 import { createComponent } from '@vue/composition-api';
-import CheckboxSvg from '@/components/svg/CheckboxSvg.vue';
-import TrashSvg from '@/components/svg/TrashSvg.vue';
+import CheckboxIcon from '@/components/icons/CheckboxIcon.vue';
+import TrashIcon from '@/components/icons/TrashIcon.vue';
 
 export default createComponent({
   props: {
@@ -35,7 +44,7 @@ export default createComponent({
     removeItem: Function
   },
 
-  components: { CheckboxSvg, TrashSvg }
+  components: { CheckboxIcon, TrashIcon }
 });
 </script>
 
