@@ -10,7 +10,7 @@
             <button @click="toggleComplete(item.id)" class="mr-2 h-full">
               <CheckboxIcon
                 size="small"
-                :classes="[
+                :class="[
                   { 'hover:text-green-700': !item.completed },
                   {
                     'text-green-700 bg-green-400 hover:bg-transparent':
@@ -24,7 +24,7 @@
           </div>
 
           <button @click="removeItem(item.id)" class="ml-2">
-            <TrashIcon size="small" classes="hover:text-red-500" />
+            <TrashIcon size="small" class="hover:text-red-500" />
           </button>
         </div>
       </div>

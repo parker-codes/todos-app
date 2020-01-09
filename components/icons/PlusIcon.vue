@@ -1,5 +1,5 @@
 <template>
-  <i class="gg-add" :class="[size, classes]" />
+  <i class="gg-add" :class="[size]" />
 </template>
 
 <script lang="ts">
@@ -7,8 +7,7 @@ import { createComponent, computed } from '@vue/composition-api';
 
 export default createComponent({
   props: {
-    size: { type: String, default: 'regular' },
-    classes: String
+    size: { type: String, default: 'regular' }
   }
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <i class="gg-trash" :class="[size, classes]" />
+  <i class="gg-trash" :class="[size]" />
 </template>
 
 <script lang="ts">
@@ -7,8 +7,7 @@ import { createComponent } from '@vue/composition-api';
 
 export default createComponent({
   props: {
-    size: { type: String, default: 'regular' },
-    classes: String
+    size: { type: String, default: 'regular' }
   }
 });
 </script>

@@ -3,7 +3,7 @@
     <input v-model="newTitle" @keydown.enter="submit" class="mr-2" />
 
     <button @click="submit">
-      <PlusIcon classes="hover:bg-gray-400" />
+      <PlusIcon class="hover:bg-gray-400" />
     </button>
   </div>
 </template>
