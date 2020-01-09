@@ -13,7 +13,7 @@ import { createComponent, ref } from '@vue/composition-api';
 import PlusIcon from '@/components/icons/PlusIcon.vue';
 
 export default createComponent({
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const newTitle = ref('');
 
     function submit() {
