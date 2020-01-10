@@ -1,6 +1,12 @@
 <template>
   <div class="mt-4 flex px-3 py-2 text-gray-800 rounded bg-white">
-    <input v-model="newTitle" @keydown.enter="submit" class="mr-2" />
+    <input
+      v-model="newTitle"
+      @keydown.enter="submit"
+      id="new-item-input"
+      ref="input"
+      class="mr-2"
+    />
 
     <button @click="submit">
       <PlusIcon class="hover:bg-gray-400" />
@@ -15,14 +21,21 @@ import PlusIcon from '@/components/icons/PlusIcon.vue';
 export default createComponent({
   setup(_, { emit }) {
     const newTitle = ref('');
+    const input = ref<HTMLElement>(null);
 
     function submit() {
       if (!newTitle.value.trim()) return;
+
       emit('submit', newTitle.value.trim());
       newTitle.value = '';
+      setFocus();
     }
 
-    return { newTitle, submit };
+    function setFocus() {
+      if (input.value) input.value.focus();
+    }
+
+    return { newTitle, input, submit };
   },
 
   components: { PlusIcon }

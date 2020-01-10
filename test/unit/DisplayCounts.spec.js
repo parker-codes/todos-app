@@ -1,8 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import DisplayCounts from '@/components/DisplayCounts.vue';
-import Vue from 'vue';
-import CompositionApi from '@vue/composition-api';
-Vue.use(CompositionApi);
+import '@/test/composition-helper';
 
 describe('DisplayCounts', () => {
   test('is a Vue instance', () => {
