@@ -1,7 +1,7 @@
 {
-  "name": "todo",
+  "name": "todos-app",
   "version": "1.0.0",
-  "description": "A practice TODO list",
+  "description": "A TODO app using Nuxt, Vue Composition API, Tailwind CSS, and Tauri (w/ Rust)",
   "author": "Parker McMullin",
   "private": true,
   "scripts": {
