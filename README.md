@@ -1,11 +1,12 @@
-# todo
+# TODOs App
 
-> A practice TODO list
+> A TODO app using Nuxt, Vue Composition API, Tailwind CSS, and Tauri (w/ Rust)
 
 # Next Steps
 
-- [ ] utilize async browser storage
-  - Reference https://codesandbox.io/s/q8ml8y9w9w
+- [ ] swap out CSS.gg for regular svg icons
+- [ ] add Tauri core
+  - [ ] add command for dev in README
 - [ ] add e2e tests
 
 ## Build Setup
@@ -24,5 +25,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
