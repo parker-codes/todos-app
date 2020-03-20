@@ -1,5 +1,5 @@
 export default {
-  mode: 'universal',
+  mode: 'spa',
   modern: true,
   /*
    ** Headers of the page
@@ -24,11 +24,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['node_modules/css.gg/icons-compressed/icons.css'],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/composition-api', '@/plugins/vue-idb.client'],
+  plugins: ['@/plugins/composition-api'],
   /*
    ** Nuxt.js dev-modules
    */
