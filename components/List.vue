@@ -3,7 +3,7 @@
     <TransitionGroup name="list">
       <div v-for="(item, index) in items" :key="index">
         <div
-          class="mb-2 flex justify-between"
+          class="mb-2 w-full flex justify-between"
           :class="{ 'line-through text-gray-700': item.completed }"
         >
           <div class="flex">
@@ -12,29 +12,29 @@
               role="switch"
               :aria-checked="item.completed ? 'true' : 'false'"
               aria-label="toggle task completion"
-              class="mr-2 h-full"
+              class="mr-2 w-6 h-6 rounded-full"
+              :class="[
+                { 'hover:text-green-600': !item.completed },
+                {
+                  'text-green-600 bg-green-300 hover:bg-transparent':
+                    item.completed
+                }
+              ]"
             >
-              <CheckboxIcon
-                size="small"
-                :class="[
-                  { 'hover:text-green-700': !item.completed },
-                  {
-                    'text-green-700 bg-green-400 hover:bg-transparent':
-                      item.completed
-                  }
-                ]"
-              />
+              <CheckboxIcon />
             </button>
 
-            <span>{{ item.title }}</span>
+            <span class="w-4/5 truncate">
+              {{ item.title }}
+            </span>
           </div>
 
           <button
             @click="removeItem(item.id)"
             aria-label="remove task"
-            class="ml-2"
+            class="ml-2 w-4"
           >
-            <TrashIcon size="small" class="hover:text-red-500" />
+            <TrashIcon class="hover:text-red-500" />
           </button>
         </div>
       </div>

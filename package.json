@@ -19,7 +19,6 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@vue/composition-api": "^0.3.4",
-    "css.gg": "^1.0.6",
     "nuxt": "^2.0.0",
     "tauri": "^0.4.5"
   },

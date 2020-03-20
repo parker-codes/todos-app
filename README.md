@@ -4,7 +4,6 @@
 
 # Next Steps
 
-- [ ] swap out CSS.gg for regular svg icons
 - [ ] add e2e tests
 
 ## Build Setup

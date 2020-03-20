@@ -1,31 +1,24 @@
 <template>
-  <i class="gg-add" :class="[size]" />
+  <svg
+    class="w-full h-full fill-current stroke-current"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 64 64"
+    stroke-width="4"
+  >
+    <g
+      transform="translate(.5 .5)"
+      fill="none"
+      stroke-linecap="square"
+      stroke-miterlimit="10"
+    >
+      <path data-color="color-2" d="M32 18v28M46 32H18" />
+      <circle cx="32" cy="32" r="29" />
+    </g>
+  </svg>
 </template>
 
 <script lang="ts">
 import { createComponent, computed } from '@vue/composition-api';
 
-export default createComponent({
-  props: {
-    size: { type: String, default: 'regular' }
-  }
-});
+export default createComponent({});
 </script>
-
-<style scoped>
-.gg-add.mini {
-  --ggs: 0.8;
-}
-.gg-add.small {
-  --ggs: 0.95;
-}
-.gg-add.regular {
-  --ggs: 1;
-}
-.gg-add.large {
-  --ggs: 2;
-}
-.gg-add.x-large {
-  --ggs: 3;
-}
-</style>

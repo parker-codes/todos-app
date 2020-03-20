@@ -3600,11 +3600,6 @@ css-what@^3.2.1:
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.2.1.tgz#f4a8f12421064621b456755e34a03a2c22df5da1"
   integrity sha512-WwOrosiQTvyms+Ti5ZC5vGEK0Vod3FTt1ca+payZqvKuGJF+dq7bG63DstxtN0dpm6FxY27a/zS3Wten+gEtGw==
 
-css.gg@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/css.gg/-/css.gg-1.0.6.tgz#b8d13288a22e358265676a375ab89425411daaa2"
-  integrity sha512-Bv8GTVkeuSqqkgdCJ+tJopRxf/mp/wP6hkL13BdCSs3FadD0GWyU3gKdjuaaFkfxkgYK+GhjSX3EA+cXLHBFpA==
-
 css@^2.1.0:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/css/-/css-2.2.4.tgz#c646755c73971f2bba6a601e2cf2fd71b1298929"

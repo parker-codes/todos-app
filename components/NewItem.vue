@@ -1,16 +1,22 @@
 <template>
-  <div class="mt-4 flex px-3 py-2 text-gray-800 rounded bg-white">
+  <div
+    class="mt-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded bg-white"
+  >
     <input
       v-model="newTitle"
       @keydown.enter="submit"
       id="new-item-input"
       ref="input"
       aria-label="input for new task"
-      class="mr-2"
+      class="mr-2 flex-auto"
     />
 
-    <button @click="submit" aria-label="submit new task">
-      <PlusIcon class="hover:bg-gray-400" />
+    <button
+      @click="submit"
+      aria-label="submit new task"
+      class="w-6 h-6 rounded-full hover:bg-gray-400"
+    >
+      <PlusIcon />
     </button>
   </div>
 </template>
