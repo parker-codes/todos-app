@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/4">
+  <div>
     <h1 class="font-extrabold text-3xl tracking-wider text-center underline">
       TODOs
     </h1>
