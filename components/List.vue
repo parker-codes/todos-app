@@ -7,7 +7,13 @@
           :class="{ 'line-through text-gray-700': item.completed }"
         >
           <div class="flex">
-            <button @click="toggleComplete(item.id)" class="mr-2 h-full">
+            <button
+              @click="toggleComplete(item.id)"
+              role="switch"
+              :aria-checked="item.completed ? 'true' : 'false'"
+              aria-label="toggle task completion"
+              class="mr-2 h-full"
+            >
               <CheckboxIcon
                 size="small"
                 :class="[
@@ -23,7 +29,11 @@
             <span>{{ item.title }}</span>
           </div>
 
-          <button @click="removeItem(item.id)" class="ml-2">
+          <button
+            @click="removeItem(item.id)"
+            aria-label="remove task"
+            class="ml-2"
+          >
             <TrashIcon size="small" class="hover:text-red-500" />
           </button>
         </div>

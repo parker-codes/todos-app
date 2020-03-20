@@ -5,10 +5,11 @@
       @keydown.enter="submit"
       id="new-item-input"
       ref="input"
+      aria-label="input for new task"
       class="mr-2"
     />
 
-    <button @click="submit">
+    <button @click="submit" aria-label="submit new task">
       <PlusIcon class="hover:bg-gray-400" />
     </button>
   </div>

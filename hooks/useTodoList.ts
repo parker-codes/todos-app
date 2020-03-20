@@ -1,5 +1,4 @@
 import { ref, Ref, computed } from '@vue/composition-api';
-// import todosDB from '@/stores/client/todos';
 
 export default () => {
   const todos: Ref<Todo[]> = ref([]);
@@ -50,22 +49,3 @@ class Todo {
       .substring(2, 15);
   }
 }
-
-// TODO: iDB
-// add(value) {
-//       this.$db.tests
-//         .add({
-//           id: uuid(),
-//           title: value,
-//           created_at: new Date(),
-//           updated_at: new Date()
-//         })
-//         .then(() => this.update());
-//     },
-//     remove(test) {
-//       this.$db.tests
-//         .where("id")
-//         .equals(test.id)
-//         .delete()
-//         .then(() => this.update());
-//     }

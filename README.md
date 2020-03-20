@@ -5,8 +5,6 @@
 # Next Steps
 
 - [ ] swap out CSS.gg for regular svg icons
-- [ ] add Tauri core
-  - [ ] add command for dev in README
 - [ ] add e2e tests
 
 ## Build Setup
@@ -17,6 +15,9 @@ $ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn dev
+
+# serve Tuari core (must also be running yarn dev in another terminal)
+$ yarn tauri dev
 
 # build for production and launch server
 $ yarn build
