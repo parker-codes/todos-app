@@ -1,20 +1,13 @@
 {
+  "include": ["**/*"],
+  "exclude": ["node_modules", "build"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
-    "esModuleInterop": true,
-    "allowJs": true,
+    "outDir": "build",
+    "rootDir": "./",
     "sourceMap": true,
-    "strict": true,
-    "noEmit": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
-    },
-    "types": ["@types/node", "@nuxt/types"]
-  },
-  "exclude": ["node_modules"]
+      "~": ["./src/*"]
+    }
+  }
 }
