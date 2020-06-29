@@ -5,10 +5,8 @@ function createTodos() {
 
   function add({ detail }) {
     update((todos) => {
-      const newTodo = new Todo({ title: detail.title });
-      console.log('newTodo', newTodo);
+      const newTodo = Todo({ title: detail.title });
       todos.push(newTodo);
-      console.log('todos', todos);
       return todos;
     });
   }
@@ -18,7 +16,7 @@ function createTodos() {
       const todo = todos.find((todo) => todo.id === detail.id);
       if (!todo) return;
 
-      todo.completed ? todo.markAsIncomplete() : todo.markAsComplete();
+      todo.completed = !todo.completed;
       return todos;
     });
   }
@@ -46,26 +44,10 @@ export const incompleteCount = derived(
   ($todos) => $todos.filter((todo) => !todo.completed).length
 );
 
-class Todo {
-  id;
-  title;
-  completed = false;
+function Todo({ id = generateId(), title = '', completed = false } = {}) {
+  return { id, title, completed };
+}
 
-  constructor({ id = undefined, title = '', completed = false } = {}) {
-    this.id = id || this._generateId();
-    this.title = title || '';
-    this.completed = completed;
-  }
-
-  markAsComplete() {
-    this.completed = true;
-  }
-
-  markAsIncomplete() {
-    this.completed = false;
-  }
-
-  _generateId() {
-    return Math.random().toString(36).substring(2, 15);
-  }
+function generateId() {
+  return Math.random().toString(36).substring(2, 15);
 }

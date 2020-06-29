@@ -22,9 +22,7 @@ function setFocus() {
 }
 </script>
 
-<div
-  class="mt-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded bg-white"
->
+<div class="m-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded bg-white shadow">
   <input
     bind:value={newTitle}
     on:keydown={submit}
@@ -36,7 +34,7 @@ function setFocus() {
   <button
     on:click={submit}
     aria-label="submit new task"
-    class="w-6 h-6 rounded-full hover:bg-gray-400"
+    class="w-5 h-5 rounded-full hover:bg-gray-400"
   >
     <PlusIcon />
   </button>

@@ -6,8 +6,8 @@ import NewItem from '../components/NewItem.svelte';
 import DisplayCounts from '../components/DisplayCounts.svelte';
 </script>
 
-<div>
-    <h1 class="font-extrabold text-3xl tracking-wider text-center underline">
+<div class="mx-4 w-full max-w-lg">
+    <h1 class="font-extrabold text-3xl text-gray-900 tracking-wider text-center underline">
         TODOs
     </h1>
 
