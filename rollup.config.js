@@ -12,10 +12,12 @@ const distDir = 'dist';
 const buildDir = `${distDir}/build`;
 const production = !process.env.ROLLUP_WATCH;
 const bundling = process.env.BUNDLING || production ? 'dynamic' : 'bundle';
-const shouldPrerender = typeof process.env.PRERENDER !== 'undefined' ? process.env.PRERENDER : !!production;
+const shouldPrerender =
+  typeof process.env.PRERENDER !== 'undefined'
+    ? process.env.PRERENDER
+    : !!production;
 
 const preprocess = sveltePreprocess({
-  typescript: true,
   postcss: true,
 });
 
@@ -36,7 +38,12 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
       copy({
         targets: [
           { src: [staticDir + '/*', '!*/(__index.html)'], dest: distDir },
-          { src: `${staticDir}/__index.html`, dest: distDir, rename: '__app.html', transform },
+          {
+            src: `${staticDir}/__index.html`,
+            dest: distDir,
+            rename: 'index.html',
+            transform,
+          },
         ],
         copyOnce: true,
         flatten: false,
@@ -60,7 +67,8 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
       // https://github.com/rollup/rollup-plugin-commonjs
       resolve({
         browser: true,
-        dedupe: (importee) => importee === 'svelte' || importee.startsWith('svelte/'),
+        dedupe: (importee) =>
+          importee === 'svelte' || importee.startsWith('svelte/'),
       }),
       commonjs(),
 

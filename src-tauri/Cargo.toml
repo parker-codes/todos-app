@@ -1,0 +1,26 @@
+[package]
+name = "todos-app"
+version = "1.0.0"
+description = "Handy TODOs app!"
+authors = [ "Parker McMullin <parker.mcmullin01@gmail.com>" ]
+license = ""
+repository = "https://github.com/parker-codes/todos-app"
+default-run = "app"
+edition = "2018"
+build = "src/build.rs"
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = [ "derive" ] }
+tauri = { version = "0.6", features = [ "all-api", "edge" ] }
+
+[target."cfg(windows)".build-dependencies]
+winres = "0.1"
+
+[features]
+embedded-server = [ "tauri/embedded-server" ]
+no-server = [ "tauri/no-server" ]
+
+[[bin]]
+name = "app"
+path = "src/main.rs"

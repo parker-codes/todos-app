@@ -9,8 +9,8 @@
   from = "/*"
   to = "/.netlify/functions/ssr"
   status = 200
-  
+
   # SPA only
   # from = "/*"
-  # to = "/__app.html"
+  # to = "/index.html"
   # status = 200

@@ -1,9 +1,9 @@
-<script lang="typescript">
+<script>
+import { todos, incompleteCount } from '../stores/todos';
+
 import List from '../components/List.svelte';
 import NewItem from '../components/NewItem.svelte';
 import DisplayCounts from '../components/DisplayCounts.svelte';
-
-import todos from '../stores/todos';
 </script>
 
 <div>
@@ -11,9 +11,9 @@ import todos from '../stores/todos';
         TODOs
     </h1>
 
-    <List items={$todos} />
+    <List items={$todos} on:toggleComplete={todos.toggleComplete} on:remove={todos.remove} />
 
-    <NewItem on:add={todos.addItem} />
+    <NewItem on:add={todos.add} />
 
-    <DisplayCounts total={$todos.length} remaining={todos.incompleteCount} />
+    <DisplayCounts total={$todos.length} remaining={$incompleteCount} />
 </div>
