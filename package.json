@@ -9,6 +9,7 @@
     "build": "yarn routify -- -b && rollup -c",
     "serve": "spassr --serve-spa --serve-ssr",
     "export": "routify export",
+    "build-and-export": "yarn build && yarn export",
     "build:docker": "yarn build && ./scripts/docker/docker-build.sh",
     "deploy:now": "cd scripts/now && yarn deploy",
     "deploy:netlify": "cd scripts/netlify && yarn deploy",
