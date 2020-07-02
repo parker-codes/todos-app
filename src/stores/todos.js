@@ -1,11 +1,17 @@
 import { writable, derived } from 'svelte/store';
+import Storage from '../services/Storage';
 
 function createTodos() {
-  const { subscribe, update } = writable([]);
+  const { subscribe, set, update } = writable([]);
+
+  async function init() {
+    const todos = await Storage.all();
+    set(todos);
+  }
 
   function add({ detail }) {
     update((todos) => {
-      const newTodo = Todo({ title: detail.title });
+      const newTodo = await Storage.create({ title: detail.title });
       todos.push(newTodo);
       return todos;
     });
@@ -17,6 +23,7 @@ function createTodos() {
       if (!todo) return;
 
       todo.completed = !todo.completed;
+      Storage.update(todo);
       return todos;
     });
   }
@@ -25,12 +32,14 @@ function createTodos() {
     update((todos) => {
       const index = todos.findIndex((todo) => todo.id === detail.id);
       todos.splice(index, 1);
+      Storage.remove(detail.id);
       return todos;
     });
   }
 
   return {
     subscribe,
+    init,
     add,
     toggleComplete,
     remove,
@@ -43,11 +52,3 @@ export const incompleteCount = derived(
   todos,
   ($todos) => $todos.filter((todo) => !todo.completed).length
 );
-
-function Todo({ id = generateId(), title = '', completed = false } = {}) {
-  return { id, title, completed };
-}
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 15);
-}

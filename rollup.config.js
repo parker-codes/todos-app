@@ -44,6 +44,12 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
             rename: 'index.html',
             transform,
           },
+          {
+            src: `${staticDir}/__index.html`,
+            dest: distDir,
+            rename: '__app.html',
+            transform,
+          },
         ],
         copyOnce: true,
         flatten: false,

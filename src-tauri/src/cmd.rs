@@ -1,10 +1,35 @@
 use serde::Deserialize;
 
+#[derive(Debug, Deserialize)]
+pub struct Todo {
+  id: i32,
+  title: String,
+  completed: bool,
+}
+
 #[derive(Deserialize)]
 #[serde(tag = "cmd", rename_all = "camelCase")]
 pub enum Cmd {
-  // your custom commands
-  // multiple arguments are allowed
-  // note that rename_all = "camelCase": you need to use "myCustomCommand" on JS
-  MyCustomCommand { argument: String },
+  GetAllTodos {
+    callback: String,
+    error: String,
+  },
+
+  CreateTodo {
+    title: String,
+    callback: String,
+    error: String,
+  },
+
+  UpdateTodo {
+    todo: Todo,
+    callback: String,
+    error: String,
+  },
+
+  RemoveTodo {
+    id: String,
+    callback: String,
+    error: String,
+  },
 }

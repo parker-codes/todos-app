@@ -1,9 +1,14 @@
 <script>
+import { onMount } from 'svelte';
 import { todos, incompleteCount } from '../stores/todos';
 
 import List from '../components/List.svelte';
 import NewItem from '../components/NewItem.svelte';
 import DisplayCounts from '../components/DisplayCounts.svelte';
+
+onMount(() => {
+    todos.init();
+})
 </script>
 
 <div class="mx-4 w-full max-w-lg">

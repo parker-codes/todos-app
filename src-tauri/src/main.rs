@@ -15,11 +15,73 @@ fn main() {
         }
         Ok(command) => {
           match command {
-            // definitions for your custom commands from Cmd here
-            MyCustomCommand { argument } => {
-              //  your command code
-              println!("{}", argument);
-            }
+            GetAllTodos { callback, error } => {
+              // get all todos
+              tauri::execute_promise(
+                _webview,
+                move || {
+                  // perform an async operation here
+                  // if the returned value is Ok, the promise will be resolved with its value
+                  // if the returned value is Err, the promise will be rejected with its value
+                  // the value is a string that will be eval'd
+                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                },
+                callback,
+                error,
+              )
+            },
+
+            CreateTodo { title, callback, error } => {
+              // get all todos
+              tauri::execute_promise(
+                _webview,
+                move || {
+                  println!("{}", title);
+                  // perform an async operation here
+                  // if the returned value is Ok, the promise will be resolved with its value
+                  // if the returned value is Err, the promise will be rejected with its value
+                  // the value is a string that will be eval'd
+                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                },
+                callback,
+                error,
+              )
+            },
+
+            UpdateTodo { todo, callback, error } => {
+              tauri::execute_promise(
+                _webview,
+                move || {
+                  println!("{:?}", todo);
+                  // find with todo.id
+
+                  // perform an async operation here
+                  // if the returned value is Ok, the promise will be resolved with its value
+                  // if the returned value is Err, the promise will be rejected with its value
+                  // the value is a string that will be eval'd
+                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                },
+                callback,
+                error,
+              )
+            },
+
+            RemoveTodo { id, callback, error } => {
+              // get all todos
+              tauri::execute_promise(
+                _webview,
+                move || {
+                  println!("{}", id);
+                  // perform an async operation here
+                  // if the returned value is Ok, the promise will be resolved with its value
+                  // if the returned value is Err, the promise will be rejected with its value
+                  // the value is a string that will be eval'd
+                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                },
+                callback,
+                error,
+              )
+            },
           }
           Ok(())
         }
