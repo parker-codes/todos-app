@@ -4,8 +4,9 @@
 )]
 
 mod cmd;
+mod models;
 
-use cmd::{AppData, Todo};
+use models::{AppData, Todo};
 
 fn main() {
   tauri::AppBuilder::new()
@@ -18,13 +19,11 @@ fn main() {
         Ok(command) => {
           match command {
             GetAllTodos { callback, error } => {
-              // get all todos
               tauri::execute_promise(
                 _webview,
                 move || {
-                  println!("GetAllTodos");
+                  let todos = AppData::get_todos();
 
-                  let todos: Vec<Todo> = vec![];
                   let serialized = serde_json::to_string(&todos).unwrap();
                   Ok(serialized)
                 },
@@ -34,14 +33,12 @@ fn main() {
             },
 
             CreateTodo { title, callback, error } => {
-              // get all todos
               tauri::execute_promise(
                 _webview,
                 move || {
-                  println!("CreateTodo");
-                  println!("{}", title);
-
                   let todo = Todo::new_with_title(title);
+                  AppData::create_todo(&todo);
+
                   let serialized = serde_json::to_string(&todo).unwrap();
                   Ok(serialized)
                 },
@@ -54,9 +51,7 @@ fn main() {
               tauri::execute_promise(
                 _webview,
                 move || {
-                  println!("UpdateTodo");
-                  println!("{:?}", todo);
-                  // find with todo.id
+                  AppData::update_todo(&todo);
 
                   Ok("{}".to_string())
                 },
@@ -66,12 +61,10 @@ fn main() {
             },
 
             RemoveTodo { id, callback, error } => {
-              // get all todos
               tauri::execute_promise(
                 _webview,
                 move || {
-                  println!("RemoveTodo");
-                  println!("{}", id);
+                  AppData::remove_todo(id);
 
                   Ok("{}".to_string())
                 },

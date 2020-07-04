@@ -1,16 +1,18 @@
 import tauri from 'tauri/api/tauri';
 
-function all() {
-  return tauri.promisified({
+async function all() {
+  const all = await tauri.promisified({
     cmd: 'getAllTodos',
   });
+  return JSON.parse(all);
 }
 
-function create({ title }) {
-  return tauri.promisified({
+async function create({ title }) {
+  const todo = await tauri.promisified({
     cmd: 'createTodo',
     title,
   });
+  return JSON.parse(todo);
 }
 
 function update(todo) {

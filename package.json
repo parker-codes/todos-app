@@ -40,6 +40,6 @@
     "@sveltech/routify": "^1.7.12",
     "@tailwindcss/ui": "^0.3.0",
     "tailwindcss": "^1.4.6",
-    "tauri": "^0.7.1"
+    "tauri": "^0.8.0"
   }
 }

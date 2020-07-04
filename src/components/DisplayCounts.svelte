@@ -1,8 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
 
-  console.log('hey');
-
   export let total;
   export let remaining;
 </script>

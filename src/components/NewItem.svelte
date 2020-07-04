@@ -31,7 +31,7 @@
     on:keydown={submit}
     id="new-item-input"
     aria-label="input for new task"
-    class="mr-2 flex-auto" />
+    class="mr-2 flex-auto outline-none" />
 
   <button
     on:click={submit}

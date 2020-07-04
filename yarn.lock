@@ -4926,10 +4926,10 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-tauri@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/tauri/-/tauri-0.7.1.tgz#0b0c42b844bbeb795a15bff79b1a80f865c52352"
-  integrity sha512-p2qYJwASb4mDkPln8Cw536ZNeZTatOlEGq2L8UUAzxQ3EykKSQY3yAZY02LYJV/r0T50pKntfGCGyU0nzWCdQQ==
+tauri@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/tauri/-/tauri-0.8.0.tgz#f6e9309aa7d9a5f16f875a8f9131986610f9f876"
+  integrity sha512-nr628nE3Sv1aUL5TFcYiecEau59aduGJRDKbXUUVRa98kHek0l1G0peAtRKp1h1kzXSzfrKQ0pEiYVCUEDKgcg==
   dependencies:
     "@tauri-apps/tauri-inliner" "1.14.1"
     "@tauri-apps/toml" "2.2.4"

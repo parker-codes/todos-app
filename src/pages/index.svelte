@@ -6,8 +6,6 @@
   import NewItem from '../components/NewItem.svelte';
   import DisplayCounts from '../components/DisplayCounts.svelte';
 
-  $: console.log(JSON.stringify($todos, null, 4));
-
   onMount(() => {
     todos.init();
   });
@@ -27,5 +25,5 @@
 
   <NewItem on:add={todos.add} />
 
-  <DisplayCounts total={$todos.length} remaining={$incompleteCount} />
+  <!-- <DisplayCounts total={$todos.length} remaining={$incompleteCount} /> -->
 </div>
