@@ -1,11 +1,30 @@
-use serde::Deserialize;
+use serde::{Serialize, Deserialize};
+use uuid::Uuid;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AppData {
+  todos: Vec<Todo>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Todo {
-  id: i32,
+  id: String,
   title: String,
   completed: bool,
 }
+
+impl Todo {
+  pub fn new_with_title(title: String) -> Self {
+    let id = Uuid::new_v4().to_string();
+
+    Todo {
+      id,
+      title,
+      completed: false,
+    }
+  }
+}
+
 
 #[derive(Deserialize)]
 #[serde(tag = "cmd", rename_all = "camelCase")]

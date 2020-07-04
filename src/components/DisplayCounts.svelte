@@ -1,8 +1,10 @@
 <script>
-import { fade } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
 
-export let total;
-export let remaining;
+  console.log('hey');
+
+  export let total;
+  export let remaining;
 </script>
 
 {#if total > 0}

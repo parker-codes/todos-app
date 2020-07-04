@@ -5,6 +5,8 @@
 
 mod cmd;
 
+use cmd::{AppData, Todo};
+
 fn main() {
   tauri::AppBuilder::new()
     .invoke_handler(|_webview, arg| {
@@ -20,11 +22,11 @@ fn main() {
               tauri::execute_promise(
                 _webview,
                 move || {
-                  // perform an async operation here
-                  // if the returned value is Ok, the promise will be resolved with its value
-                  // if the returned value is Err, the promise will be rejected with its value
-                  // the value is a string that will be eval'd
-                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                  println!("GetAllTodos");
+
+                  let todos: Vec<Todo> = vec![];
+                  let serialized = serde_json::to_string(&todos).unwrap();
+                  Ok(serialized)
                 },
                 callback,
                 error,
@@ -36,12 +38,12 @@ fn main() {
               tauri::execute_promise(
                 _webview,
                 move || {
+                  println!("CreateTodo");
                   println!("{}", title);
-                  // perform an async operation here
-                  // if the returned value is Ok, the promise will be resolved with its value
-                  // if the returned value is Err, the promise will be rejected with its value
-                  // the value is a string that will be eval'd
-                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+
+                  let todo = Todo::new_with_title(title);
+                  let serialized = serde_json::to_string(&todo).unwrap();
+                  Ok(serialized)
                 },
                 callback,
                 error,
@@ -52,14 +54,11 @@ fn main() {
               tauri::execute_promise(
                 _webview,
                 move || {
+                  println!("UpdateTodo");
                   println!("{:?}", todo);
                   // find with todo.id
 
-                  // perform an async operation here
-                  // if the returned value is Ok, the promise will be resolved with its value
-                  // if the returned value is Err, the promise will be rejected with its value
-                  // the value is a string that will be eval'd
-                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+                  Ok("{}".to_string())
                 },
                 callback,
                 error,
@@ -71,12 +70,10 @@ fn main() {
               tauri::execute_promise(
                 _webview,
                 move || {
+                  println!("RemoveTodo");
                   println!("{}", id);
-                  // perform an async operation here
-                  // if the returned value is Ok, the promise will be resolved with its value
-                  // if the returned value is Err, the promise will be rejected with its value
-                  // the value is a string that will be eval'd
-                  Ok("{ key: 'response', value: [{ id: 3 }] }".to_string())
+
+                  Ok("{}".to_string())
                 },
                 callback,
                 error,

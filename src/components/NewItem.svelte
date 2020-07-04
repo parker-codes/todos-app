@@ -1,41 +1,42 @@
 <script>
-import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
-import PlusIcon from './icons/PlusIcon.svelte';
+  import PlusIcon from './icons/PlusIcon.svelte';
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-let newTitle = '';
+  let inputRef;
+  let newTitle = '';
 
-function submit(event) {
-  if (event.key !== undefined && event.key !== 'Enter') return;
-  if (!newTitle.trim()) return;
+  function submit(event) {
+    if (event.key !== undefined && event.key !== 'Enter') return;
+    if (!newTitle.trim()) return;
 
-  dispatch('add', { title: newTitle.trim() });
-  newTitle = '';
-  setFocus();
-}
+    dispatch('add', { title: newTitle.trim() });
+    newTitle = '';
+    setFocus();
+  }
 
-function setFocus() {
-  // TODO: figure this out in svelte
-  // if (input.value) input.value.focus();
-}
+  function setFocus() {
+    if (inputRef) inputRef.focus();
+  }
 </script>
 
-<div class="m-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded bg-white shadow">
+<div
+  class="m-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded
+  bg-white shadow">
   <input
+    bind:this={inputRef}
     bind:value={newTitle}
     on:keydown={submit}
     id="new-item-input"
     aria-label="input for new task"
-    class="mr-2 flex-auto"
-  />
+    class="mr-2 flex-auto" />
 
   <button
     on:click={submit}
     aria-label="submit new task"
-    class="w-5 h-5 rounded-full hover:bg-gray-400"
-  >
+    class="w-5 h-5 rounded-full hover:bg-gray-400">
     <PlusIcon />
   </button>
 </div>

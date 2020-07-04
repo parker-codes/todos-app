@@ -9,11 +9,11 @@ function createTodos() {
     set(todos);
   }
 
-  function add({ detail }) {
+  async function add({ detail }) {
+    const newTodo = await Storage.create({ title: detail.title });
+
     update((todos) => {
-      const newTodo = await Storage.create({ title: detail.title });
-      todos.push(newTodo);
-      return todos;
+      return [...todos, newTodo];
     });
   }
 
