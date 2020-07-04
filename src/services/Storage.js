@@ -1,5 +1,8 @@
 import tauri from 'tauri/api/tauri';
 
+if (!window.external) { window.external = {}; }
+if (!window.external.invoke) { window.external.invoke = () => {}; }
+
 async function all() {
   const all = await tauri.promisified({
     cmd: 'getAllTodos',
