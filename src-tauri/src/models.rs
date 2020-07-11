@@ -7,9 +7,7 @@ pub struct AppData;
 impl AppData {
   fn store() -> Store {
     let app_dir_path = tauri::api::path::app_dir().expect("Couldn't determine app directory");
-    // let app_dir_path = path_buf.to_str().expect("Couldn't determine app directory");
 
-    // TODO: make sure directory exisits
     if !app_dir_path.exists() {
         std::fs::create_dir(&app_dir_path).expect("Couldn't create app directory");
     }

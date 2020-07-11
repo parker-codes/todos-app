@@ -1,17 +1,17 @@
-import tauri from 'tauri/api/tauri';
+import { promisified } from 'tauri/api/tauri';
 
 if (!window.external) { window.external = {}; }
 if (!window.external.invoke) { window.external.invoke = () => {}; }
 
 async function all() {
-  const all = await tauri.promisified({
+  const all = await promisified({
     cmd: 'getAllTodos',
   });
   return JSON.parse(all);
 }
 
 async function create({ title }) {
-  const todo = await tauri.promisified({
+  const todo = await promisified({
     cmd: 'createTodo',
     title,
   });
@@ -19,14 +19,14 @@ async function create({ title }) {
 }
 
 function update(todo) {
-  return tauri.promisified({
+  return promisified({
     cmd: 'updateTodo',
     todo,
   });
 }
 
 function remove(id) {
-  return tauri.promisified({
+  return promisified({
     cmd: 'removeTodo',
     id,
   });

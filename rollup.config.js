@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
 import del from 'del';
 import sveltePreprocess from 'svelte-preprocess';
+import babel from 'rollup-plugin-babel';
 
 const staticDir = 'static';
 const distDir = 'dist';
@@ -77,6 +78,11 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
           importee === 'svelte' || importee.startsWith('svelte/'),
       }),
       commonjs(),
+
+      babel({
+        extensions: ['.js', '.mjs', '.html', '.svelte'],
+        include: ['src/**', 'node_modules/svelte/**'],
+      }),
 
       // If we're building for production (npm run build
       // instead of npm run dev), minify

@@ -304,11 +304,10 @@ dependencies = [
 
 [[package]]
 name = "dirs"
-version = "3.0.0"
+version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2fddc3610d8f9552384e06ebc87f714e1d0b2b64a99194d2faf36d7ae5f48549"
+checksum = "142995ed02755914747cc6ca76fc7e4583cd18578746716d0508ea6ed558b9ff"
 dependencies = [
- "cfg-if",
  "dirs-sys",
 ]
 
@@ -1402,9 +1401,9 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "0.7.0"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9afd0faf1dfc1f93a85d29b9fc2f73177ef3aa261b5f8a04f450dc43fb3be603"
+checksum = "9aa3c9277bed70ed95c3031f0ee72beb1be8cb76bc8c35f65be4f200b4771398"
 dependencies = [
  "anyhow",
  "base64 0.12.3",
@@ -1435,7 +1434,7 @@ checksum = "99d82ccb91ef83317b85819d60ae60609543f5d4fa6b4f629cd35b3a7c84bc0d"
 dependencies = [
  "anyhow",
  "attohttpc",
- "dirs 3.0.0",
+ "dirs 3.0.1",
  "either",
  "flate2",
  "http",
@@ -1527,9 +1526,9 @@ dependencies = [
 
 [[package]]
 name = "tauri_includedir_codegen"
-version = "0.6.1"
+version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6dc6e46568f43e5d637cc741f311bfc974a87609784ad5a73559135b6b5cfa7b"
+checksum = "afccce834cf6062a1a19d2d0018fd2a5a2d13d75f547ed0dac2cc3d9813b6ae7"
 dependencies = [
  "flate2",
  "phf_codegen",
