@@ -106,7 +106,7 @@ const bundledConfig = {
 };
 
 const dynamicConfig = {
-  inlineDynamicImports: false,
+  inlineDynamicImports: true,
   output: {
     format: 'esm',
     dir: buildDir,

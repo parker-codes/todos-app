@@ -24,7 +24,8 @@ fn main() {
                 move || {
                   let todos = AppData::get_todos();
 
-                  let serialized = serde_json::to_string(&todos).unwrap();
+                  let serialized = serde_json::to_string(&todos)
+                    .expect("Can't serialize todos list to JSON");
                   Ok(serialized)
                 },
                 callback,
@@ -39,7 +40,8 @@ fn main() {
                   let todo = Todo::new_with_title(title);
                   AppData::create_todo(&todo);
 
-                  let serialized = serde_json::to_string(&todo).unwrap();
+                  let serialized = serde_json::to_string(&todo)
+                    .expect("Can't serialize new todo to JSON");
                   Ok(serialized)
                 },
                 callback,

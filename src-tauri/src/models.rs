@@ -29,7 +29,7 @@ impl AppData {
 
   pub fn get_todos() -> Vec<Todo> {
     Self::store()
-      .all().unwrap()
+      .all().expect("Can't get all from store")
       .values().cloned().collect::<Vec<Todo>>()
   }
 
