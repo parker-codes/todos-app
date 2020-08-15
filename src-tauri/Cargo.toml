@@ -1,6 +1,6 @@
 [package]
 name = "todos-app"
-version = "1.0.0"
+version = "1.0.1"
 description = "Handy TODOs app!"
 authors = [ "Parker McMullin <parker.mcmullin01@gmail.com>" ]
 license = ""
