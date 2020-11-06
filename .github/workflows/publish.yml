@@ -19,7 +19,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: '14'
       - name: install rust stable
         uses: actions-rs/toolchain@v1
         with:
@@ -31,7 +31,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
       - run: yarn
-      - name: build finatr for tauri app
+      - name: build frontend for tauri app
         run: yarn build
       - run: cargo install tauri-bundler --force
       - uses: tauri-apps/tauri-action@v0
@@ -39,8 +39,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           includeDebug: true
-          tagName: finatr-v__VERSION__
-          releaseName: "Release finatr app v__VERSION__"
+          tagName: todos-app-v__VERSION__
+          releaseName: "Release todos-app v__VERSION__"
           releaseBody: "See the assets to download this version and install."
           releaseDraft: true
           prerelease: false
