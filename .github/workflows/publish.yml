@@ -5,10 +5,14 @@ on:
       - master
 
 jobs:
-  create-release:
-    runs-on: ubuntu-latest
-    outputs:
-      RELEASE_UPLOAD_ID: ${{ steps.create_release.outputs.id }}
+  create-and-upload-assets:
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -16,48 +20,27 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: get version
-        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
-      - name: create release
-        id: create_release
-        uses: actions/create-release@v1.1.0
+      - name: install rust stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+      - name: install webkit2gtk (ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webkit2gtk-4.0
+      - run: yarn
+      - name: build finatr for tauri app
+        run: yarn build
+      - run: cargo install tauri-bundler --force
+      - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: app-v${{ env.PACKAGE_VERSION }}
-          release_name: "Desktop app v${{ env.PACKAGE_VERSION }}"
-          body: "See the assets to download this version and install."
-          draft: true
+          includeDebug: true
+          tagName: finatr-v__VERSION__
+          releaseName: "Release finatr app v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
           prerelease: false
-  build-tauri:
-    needs: create-release
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
-
-    runs-on: ${{ matrix.platform }}
-    steps:
-    - uses: actions/checkout@v2
-    - name: setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - name: install Rust stable
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-    - name: install tauri bundler
-      run: cargo install tauri-bundler --force
-    - name: install webkit2gtk (ubuntu only)
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y webkit2gtk-4.0
-    - name: install app dependencies and build it
-      run: yarn && yarn build
-    - uses: tauri-apps/tauri-action@v0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        releaseId: ${{ needs.create-release.outputs.RELEASE_UPLOAD_ID }}
