@@ -1,20 +1,26 @@
 {
   "build": {
-    "distDir": "../dist",
-    "devPath": "http://127.0.0.1:5000",
-    "beforeDevCommand": "",
-    "beforeBuildCommand": "yarn build-and-export"
+    "distDir": "../public",
+    "devPath": "http://localhost:5000",
+    "beforeDevCommand": "yarn dev",
+    "beforeBuildCommand": "yarn build"
   },
   "ctx": {},
   "tauri": {
     "embeddedServer": {
-      "active": false
+      "active": true
     },
     "bundle": {
       "active": true,
       "targets": "all",
       "identifier": "com.parker-codes.todos-app",
-      "icon": ["icons/icon.ico", "icons/icon.png"],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
       "resources": [],
       "externalBin": [],
       "copyright": "",
@@ -32,8 +38,11 @@
       },
       "exceptionDomain": ""
     },
+    "allowlist": {
+      "all": true
+    },
     "window": {
-      "title": "TODOs",
+      "title": "Todos",
       "width": 800,
       "height": 600,
       "resizable": true,

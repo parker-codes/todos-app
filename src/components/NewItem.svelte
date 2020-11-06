@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
   import PlusIcon from './icons/PlusIcon.svelte';
@@ -6,7 +6,7 @@
   const dispatch = createEventDispatcher();
 
   let inputRef;
-  let newTitle = '';
+  let newTitle: string = '';
 
   function submit(event) {
     if (event.key !== undefined && event.key !== 'Enter') return;
@@ -22,21 +22,10 @@
   }
 </script>
 
-<div
-  class="m-4 flex justify-between items-center px-3 py-2 text-gray-800 rounded
-  bg-white shadow">
-  <input
-    bind:this={inputRef}
-    bind:value={newTitle}
-    on:keydown={submit}
-    id="new-item-input"
-    aria-label="input for new task"
-    class="mr-2 flex-auto outline-none" />
+<div class="flex items-center justify-between px-3 py-2 m-4 text-gray-800 bg-white rounded shadow">
+  <input bind:this={inputRef} bind:value={newTitle} on:keydown={submit} id="new-item-input" aria-label="input for new task" class="flex-auto mr-2 border-0" />
 
-  <button
-    on:click={submit}
-    aria-label="submit new task"
-    class="w-5 h-5 rounded-full hover:bg-gray-400">
+  <button on:click={submit} aria-label="submit new task" class="w-5 h-5 border-0 rounded-full hover:bg-gray-400">
     <PlusIcon />
   </button>
 </div>

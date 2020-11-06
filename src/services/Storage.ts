@@ -1,17 +1,21 @@
 import { promisified } from 'tauri/api/tauri';
 
-if (!window.external) { window.external = {}; }
-if (!window.external.invoke) { window.external.invoke = () => {}; }
+// if (!window.external) {
+//   window.external = {};
+// }
+// if (!window.external.invoke) {
+//   window.external.invoke = () => {};
+// }
 
 async function all() {
-  const all = await promisified({
+  const all: string = await promisified({
     cmd: 'getAllTodos',
   });
   return JSON.parse(all);
 }
 
 async function create({ title }) {
-  const todo = await promisified({
+  const todo: string = await promisified({
     cmd: 'createTodo',
     title,
   });
