@@ -195,6 +195,7 @@ dependencies = [
  "libc",
  "num-integer",
  "num-traits",
+ "serde",
  "time",
  "winapi",
 ]
@@ -1499,6 +1500,7 @@ checksum = "238ce071d267c5710f9d31451efec16c5ee22de34df17cc05e56cbc92e967117"
 name = "todos-app"
 version = "1.0.0"
 dependencies = [
+ "chrono",
  "jfs",
  "serde",
  "serde_json",

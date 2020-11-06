@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use jfs::{Config, Store};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -5,7 +6,7 @@ use uuid::Uuid;
 pub struct AppData;
 
 impl AppData {
-    fn store() -> Store {
+    fn get_store() -> Store {
         let app_dir_path = tauri::api::path::app_dir().expect("Couldn't determine app directory");
 
         if !app_dir_path.exists() {
@@ -15,7 +16,7 @@ impl AppData {
         let data_path = &app_dir_path.join("data");
         let path = data_path.to_str().expect("Couldn't build app data file");
 
-        println!("path: {}", &path);
+        dbg!(&path);
 
         let mut cfg = Config::default();
         cfg.single = true; // store in single file
@@ -28,35 +29,39 @@ impl AppData {
     }
 
     pub fn get_todos() -> Vec<Todo> {
-        Self::store()
+        let mut todos = Self::get_store()
             .all()
             .expect("Can't get all from store")
             .values()
             .cloned()
-            .collect::<Vec<Todo>>()
+            .collect::<Vec<Todo>>();
+
+        todos.sort_by(|a, b| a.created_at.cmp(&b.created_at));
+
+        todos
     }
 
     pub fn create_todo(todo: &Todo) {
-        Self::store()
+        Self::get_store()
             .save_with_id(todo, &todo.id)
             .expect("Couldn't add todo");
     }
 
     pub fn update_todo(todo: &Todo) {
-        Self::store()
+        Self::get_store()
             .save_with_id(todo, &todo.id)
             .expect("Couldn't update todo");
     }
 
     pub fn remove_todo(id: String) {
-        Self::store().delete(&id).expect("Couldn't delete todo")
+        Self::get_store().delete(&id).expect("Couldn't delete todo")
     }
 }
 
-// TODO: I need to add a created_at field to keep them in order!
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Todo {
     id: String,
+    created_at: DateTime<Utc>,
     title: String,
     completed: bool,
 }
@@ -64,9 +69,11 @@ pub struct Todo {
 impl Todo {
     pub fn new_with_title(title: String) -> Self {
         let id = Uuid::new_v4().to_string();
+        let created_at = Utc::now();
 
         Todo {
             id,
+            created_at,
             title,
             completed: false,
         }
