@@ -1,52 +1,43 @@
 import { writable, derived } from 'svelte/store';
 import Storage from '../services/Storage';
-import type Todo from '../models/Todo';
+import type { Todo, NewTodo, ExistingTodo } from '../models/Todo';
 
-function createTodos() {
-  const { subscribe, set, update } = writable([]);
+export const todos = writable([]);
 
-  async function init() {
-    const todos: Todo[] = await Storage.all();
-    set(todos);
-  }
-
-  async function add({ detail }) {
-    const newTodo: Todo = await Storage.create({ title: detail.title });
-
-    update((todos) => {
-      return [...todos, newTodo];
-    });
-  }
-
-  function toggleComplete({ detail }) {
-    update((todos) => {
-      const todo: Todo | undefined = todos.find((todo) => todo.id === detail.id);
-      if (!todo) return;
-
-      todo.completed = !todo.completed;
-      Storage.update(todo);
-      return todos;
-    });
-  }
-
-  function remove({ detail }) {
-    update((todos) => {
-      const index = todos.findIndex((todo) => todo.id === detail.id);
-      todos.splice(index, 1);
-      Storage.remove(detail.id);
-      return todos;
-    });
-  }
-
-  return {
-    subscribe,
-    init,
-    add,
-    toggleComplete,
-    remove,
-  };
+export async function init(): Promise<void> {
+  const $todos: Todo[] = await Storage.all();
+  todos.set($todos);
 }
 
-export const todos = createTodos();
+export async function add({ detail }: CustomEvent<NewTodo>): Promise<void> {
+  const newTodo: Todo = await Storage.create(detail.title);
 
-export const incompleteCount = derived(todos, ($todos) => $todos.filter((todo) => !todo.completed).length);
+  todos.update(($todos) => {
+    return [...$todos, newTodo];
+  });
+}
+
+export async function toggleComplete({ detail }: CustomEvent<ExistingTodo>): Promise<void> {
+  todos.update(($todos) => {
+    const todo: Todo | undefined = $todos.find((todo) => todo.id === detail.id);
+    if (!todo) return;
+
+    todo.completed = !todo.completed;
+    Storage.update(todo);
+    return $todos;
+  });
+}
+
+export async function remove({ detail }: CustomEvent<ExistingTodo>): Promise<void> {
+  todos.update(($todos) => {
+    const index = $todos.findIndex((todo) => todo.id === detail.id);
+    $todos.splice(index, 1);
+    Storage.remove(detail.id);
+    return $todos;
+  });
+}
+
+export const incompleteCount = derived(
+  todos,
+  ($todos) => $todos.filter((todo) => !todo.completed).length
+);

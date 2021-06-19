@@ -1,15 +1,15 @@
 {
+  "package": {
+    "productName": "todos-app",
+    "version": "0.1.0"
+  },
   "build": {
-    "distDir": "../public",
-    "devPath": "http://localhost:5000",
+    "distDir": "../build",
+    "devPath": "http://localhost:3000",
     "beforeDevCommand": "yarn dev",
     "beforeBuildCommand": "yarn build"
   },
-  "ctx": {},
   "tauri": {
-    "embeddedServer": {
-      "active": true
-    },
     "bundle": {
       "active": true,
       "targets": "all",
@@ -31,28 +31,37 @@
         "depends": [],
         "useBootstrapper": false
       },
-      "osx": {
+      "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false
+        "useBootstrapper": false,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
       },
-      "exceptionDomain": ""
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
     },
     "allowlist": {
       "all": true
     },
-    "window": {
-      "title": "Todos",
-      "width": 800,
-      "height": 600,
-      "resizable": true,
-      "fullscreen": false
-    },
+    "windows": [
+      {
+        "title": "TODOs",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
-    },
-    "inliner": {
-      "active": true
+      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     }
   }
 }

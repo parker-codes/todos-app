@@ -1,44 +1,27 @@
-import { promisified } from 'tauri/api/tauri';
+import { invoke } from '@tauri-apps/api/tauri';
+import type { Todo } from '../models/Todo';
 
-// if (!window.external) {
-//   window.external = {};
-// }
-// if (!window.external.invoke) {
-//   window.external.invoke = () => {};
-// }
-
-async function all() {
-  const all: string = await promisified({
-    cmd: 'getAllTodos',
-  });
+async function all(): Promise<Todo[]> {
+  const all: string = await invoke('get_all_todos');
   return JSON.parse(all);
 }
 
-async function create({ title }) {
-  const todo: string = await promisified({
-    cmd: 'createTodo',
-    title,
-  });
+async function create(title: string): Promise<Todo> {
+  const todo: string = await invoke('create_todo', { title });
   return JSON.parse(todo);
 }
 
-function update(todo) {
-  return promisified({
-    cmd: 'updateTodo',
-    todo,
-  });
+function update(todo: Todo): Promise<Todo> {
+  return invoke('update_todo', { todo });
 }
 
-function remove(id) {
-  return promisified({
-    cmd: 'removeTodo',
-    id,
-  });
+function remove(id: string): Promise<boolean> {
+  return invoke('remove_odo', { id });
 }
 
 export default {
   all,
   create,
   update,
-  remove,
+  remove
 };

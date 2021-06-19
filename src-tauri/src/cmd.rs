@@ -1,29 +1,30 @@
-use crate::Todo;
-use serde::Deserialize;
+use crate::models::{AppData, Todo};
 
-#[derive(Deserialize)]
-#[serde(tag = "cmd", rename_all = "camelCase")]
-pub enum Cmd {
-    GetAllTodos {
-        callback: String,
-        error: String,
-    },
+#[tauri::command]
+pub fn get_all_todos() -> Result<String, String> {
+  let todos = AppData::get_todos();
 
-    CreateTodo {
-        title: String,
-        callback: String,
-        error: String,
-    },
+  let serialized = serde_json::to_string(&todos).expect("Can't serialize todos list to JSON");
+  Ok(serialized)
+}
 
-    UpdateTodo {
-        todo: Todo,
-        callback: String,
-        error: String,
-    },
+#[tauri::command]
+pub fn create_todo(title: String) -> Result<String, String> {
+  let todo = Todo::new_with_title(title);
+  AppData::create_todo(&todo);
 
-    RemoveTodo {
-        id: String,
-        callback: String,
-        error: String,
-    },
+  let serialized = serde_json::to_string(&todo).expect("Can't serialize new todo to JSON");
+  Ok(serialized)
+}
+
+#[tauri::command]
+pub fn update_todo(todo: Todo) -> Result<(), String> {
+  AppData::update_todo(&todo);
+  Ok(())
+}
+
+#[tauri::command]
+pub fn remove_todo(id: String) -> Result<(), String> {
+  AppData::remove_todo(id);
+  Ok(())
 }
