@@ -1,15 +1,21 @@
+use std::path::PathBuf;
+
 use chrono::{DateTime, Utc};
 use jfs::{Config, Store};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-pub struct AppData;
+pub struct AppData {
+  app_dir: Option<PathBuf>,
+}
 
 impl AppData {
-  fn get_store() -> Store {
-    let context: tauri::generate_context!();
-    let app_dir_path =
-      tauri::api::path::app_dir(&context.config()).expect("Couldn't determine app directory");
+  pub fn new(app_dir: Option<PathBuf>) -> Self {
+    Self { app_dir }
+  }
+
+  fn get_store(&self) -> Store {
+    let app_dir_path = self.app_dir.expect("Couldn't determine app directory");
 
     if !app_dir_path.exists() {
       std::fs::create_dir(&app_dir_path).expect("Couldn't create app directory");
@@ -30,8 +36,9 @@ impl AppData {
     Store::new_with_cfg(&path, cfg).expect("Couldn't initialize store")
   }
 
-  pub fn get_todos() -> Vec<Todo> {
-    let mut todos = Self::get_store()
+  pub fn get_todos(&self) -> Vec<Todo> {
+    let mut todos = self
+      .get_store()
       .all()
       .expect("Can't get all from store")
       .values()
@@ -43,20 +50,22 @@ impl AppData {
     todos
   }
 
-  pub fn create_todo(todo: &Todo) {
-    Self::get_store()
+  pub fn create_todo(&self, todo: &Todo) {
+    self
+      .get_store()
       .save_with_id(todo, &todo.id)
       .expect("Couldn't add todo");
   }
 
-  pub fn update_todo(todo: &Todo) {
-    Self::get_store()
+  pub fn update_todo(&self, todo: &Todo) {
+    self
+      .get_store()
       .save_with_id(todo, &todo.id)
       .expect("Couldn't update todo");
   }
 
-  pub fn remove_todo(id: String) {
-    Self::get_store().delete(&id).expect("Couldn't delete todo")
+  pub fn remove_todo(&self, id: String) {
+    self.get_store().delete(&id).expect("Couldn't delete todo")
   }
 }
 
