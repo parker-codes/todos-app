@@ -27,4 +27,4 @@ default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
 
 [patch.crates-io]
-tao = { git = "https://github.com/tauri-apps/tao.git", branch = "dev" }
+tao = { git = "https://github.com/tauri-apps/tao", rev = "01fc43b05ea41463d512c0e3497971edc543ac9d" }

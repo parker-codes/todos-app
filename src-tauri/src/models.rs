@@ -15,7 +15,7 @@ impl AppData {
   }
 
   fn get_store(&self) -> Store {
-    let app_dir_path = self.app_dir.expect("Couldn't determine app directory");
+    let app_dir_path = self.app_dir.as_ref().expect("Couldn't determine app directory");
 
     if !app_dir_path.exists() {
       std::fs::create_dir(&app_dir_path).expect("Couldn't create app directory");

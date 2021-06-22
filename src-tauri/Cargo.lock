@@ -1052,7 +1052,7 @@ checksum = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
 dependencies = [
  "cfg-if 1.0.0",
  "libc",
- "wasi 0.10.2+wasi-snapshot-preview1",
+ "wasi 0.10.0+wasi-snapshot-preview1",
 ]
 
 [[package]]
@@ -1759,9 +1759,9 @@ dependencies = [
 
 [[package]]
 name = "openssl"
-version = "0.10.34"
+version = "0.10.35"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d7830286ad6a3973c0f1d9b73738f69c76b739301d0229c4b96501695cbe4c8"
+checksum = "549430950c79ae24e6d02e0b7404534ecf311d94cc9f861e9e4020187d13d885"
 dependencies = [
  "bitflags 1.2.1",
  "cfg-if 1.0.0",
@@ -1779,9 +1779,9 @@ checksum = "28988d872ab76095a6e6ac88d99b54fd267702734fd7ffe610ca27f533ddb95a"
 
 [[package]]
 name = "openssl-sys"
-version = "0.9.63"
+version = "0.9.65"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b6b0d6fb7d80f877617dfcb014e605e2b5ab2fb0afdf27935219bb6bd984cb98"
+checksum = "7a7907e3bfa08bb85105209cdfcb6c63d109f8f6c1ed6ca318fff5c1853fbc1d"
 dependencies = [
  "autocfg 1.0.1",
  "cc",
@@ -2675,12 +2675,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57bd81eb48f4c437cadc685403cad539345bf703d78e63707418431cecd4522b"
 
 [[package]]
-name = "strum"
-version = "0.20.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7318c509b5ba57f18533982607f24070a55d353e90d4cae30c467cdb2ad5ac5c"
-
-[[package]]
 name = "strum_macros"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2695,18 +2689,6 @@ name = "strum_macros"
 version = "0.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "87c85aa3f8ea653bfd3ddf25f7ee357ee4d204731f6aa9ad04002306f6e2774c"
-dependencies = [
- "heck",
- "proc-macro2",
- "quote 1.0.9",
- "syn 1.0.73",
-]
-
-[[package]]
-name = "strum_macros"
-version = "0.20.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee8bc6b87a5112aeeab1f4a9f7ab634fe6cbefc4850006df31267f4cfb9e3149"
 dependencies = [
  "heck",
  "proc-macro2",
@@ -2769,10 +2751,11 @@ dependencies = [
 [[package]]
 name = "tao"
 version = "0.2.6"
-source = "git+https://github.com/tauri-apps/tao.git?branch=dev#52ebebbc5cc2913bb4b50ea7743e9f6be21e6657"
+source = "git+https://github.com/tauri-apps/tao?rev=01fc43b05ea41463d512c0e3497971edc543ac9d#01fc43b05ea41463d512c0e3497971edc543ac9d"
 dependencies = [
  "bitflags 1.2.1",
  "cairo-rs",
+ "cc",
  "cocoa",
  "core-foundation 0.9.1",
  "core-graphics 0.22.2",
@@ -2780,8 +2763,10 @@ dependencies = [
  "dispatch",
  "gdk",
  "gdk-pixbuf",
+ "gdk-sys",
  "gio",
  "glib",
+ "glib-sys",
  "gtk",
  "instant",
  "lazy_static",
@@ -2795,7 +2780,9 @@ dependencies = [
  "raw-window-handle",
  "scopeguard",
  "serde",
+ "unicode-segmentation",
  "winapi",
+ "x11-dl",
 ]
 
 [[package]]
@@ -2812,7 +2799,7 @@ dependencies = [
 [[package]]
 name = "tauri"
 version = "1.0.0-beta.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "attohttpc",
  "base64",
@@ -2840,7 +2827,6 @@ dependencies = [
  "shared_child",
  "state",
  "tar",
- "tauri-hotkey",
  "tauri-macros",
  "tauri-runtime",
  "tauri-runtime-wry",
@@ -2867,7 +2853,7 @@ dependencies = [
 [[package]]
 name = "tauri-codegen"
 version = "1.0.0-beta.0"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "blake3",
  "proc-macro2",
@@ -2881,36 +2867,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "tauri-hotkey"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c6cf71018e75b7c88f0c9643329891668c32cb377a1cccdd1f2973f51eff118"
-dependencies = [
- "log",
- "once_cell",
- "serde",
- "strum 0.20.0",
- "strum_macros 0.20.1",
- "tauri-hotkey-sys",
- "thiserror",
-]
-
-[[package]]
-name = "tauri-hotkey-sys"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7024154106177cefd2592bcb0bb3df9dd3aea8a7e21f8fefb8d5b02fe115fed7"
-dependencies = [
- "cc",
- "thiserror",
- "winapi",
- "x11-dl",
-]
-
-[[package]]
 name = "tauri-macros"
 version = "1.0.0-beta.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "proc-macro2",
  "quote 1.0.9",
@@ -2921,7 +2880,7 @@ dependencies = [
 [[package]]
 name = "tauri-runtime"
 version = "0.1.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "serde",
  "serde_json",
@@ -2934,7 +2893,7 @@ dependencies = [
 [[package]]
 name = "tauri-runtime-wry"
 version = "0.1.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "ico",
  "infer",
@@ -2949,7 +2908,7 @@ dependencies = [
 [[package]]
 name = "tauri-utils"
 version = "1.0.0-beta.0"
-source = "git+https://github.com/tauri-apps/tauri?branch=dev#5ca462f6ccc6c970a6f2c8c6c1bc0e3343a52bfb"
+source = "git+https://github.com/tauri-apps/tauri?branch=dev#59784c7e5587ff10d7f0c37ac414499da42d0707"
 dependencies = [
  "heck",
  "html5ever",
@@ -3026,11 +2985,12 @@ dependencies = [
 
 [[package]]
 name = "time"
-version = "0.1.43"
+version = "0.1.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca8a50ef2360fbd1eeb0ecd46795a87a19024eb4b53c5dc916ca1fd95fe62438"
+checksum = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
 dependencies = [
  "libc",
+ "wasi 0.10.0+wasi-snapshot-preview1",
  "winapi",
 ]
 
@@ -3064,9 +3024,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.7.0"
+version = "1.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c79ba603c337335df6ba6dd6afc38c38a7d5e1b0c871678439ea973cd62a118e"
+checksum = "5fb2ed024293bb19f7a5dc54fe83bf86532a44c12a2bb8ba40d64a4509395ca2"
 dependencies = [
  "autocfg 1.0.1",
  "num_cpus",
@@ -3163,9 +3123,9 @@ dependencies = [
 
 [[package]]
 name = "vcpkg"
-version = "0.2.14"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "70455df2fdf4e9bf580a92e443f1eb0303c390d682e2ea817312c9e81f8c3399"
+checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
 
 [[package]]
 name = "version-compare"
@@ -3210,9 +3170,9 @@ checksum = "cccddf32554fecc6acb585f82a32a72e28b48f8c4c1883ddfeeeaa96f7d8e519"
 
 [[package]]
 name = "wasi"
-version = "0.10.2+wasi-snapshot-preview1"
+version = "0.10.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fd6fbd9a79829dd1ad0cc20627bf1ed606756a7f77edff7b66b7064f9cb327c6"
+checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
 
 [[package]]
 name = "wasm-bindgen"
