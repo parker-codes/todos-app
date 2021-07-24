@@ -1,4 +1,4 @@
-import { invoke } from '@tauri-apps/api/tauri';
+import type { InvokeArgs } from '@tauri-apps/api/tauri';
 import type { Todo } from '../models/Todo';
 
 async function all(): Promise<Todo[]> {
@@ -25,3 +25,9 @@ export default {
   update,
   remove
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function invoke(cmd: string, args?: InvokeArgs): Promise<any> {
+  const { invoke: tauri_invoke } = await import('@tauri-apps/api/tauri');
+  return tauri_invoke(cmd, args);
+}
