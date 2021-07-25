@@ -16,7 +16,7 @@ function update(todo: Todo): Promise<Todo> {
 }
 
 function remove(id: string): Promise<boolean> {
-  return invoke('remove_odo', { id });
+  return invoke('remove_todo', { id });
 }
 
 export default {

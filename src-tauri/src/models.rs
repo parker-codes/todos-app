@@ -21,10 +21,8 @@ impl AppData {
       std::fs::create_dir(&app_dir_path).expect("Couldn't create app directory");
     }
 
-    let data_path = &app_dir_path.join("data");
+    let data_path = &app_dir_path.join("todos");
     let path = data_path.to_str().expect("Couldn't build app data file");
-
-    dbg!(&path);
 
     let mut cfg = Config::default();
     cfg.single = true; // store in single file
