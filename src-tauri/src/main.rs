@@ -3,6 +3,9 @@
   windows_subsystem = "windows"
 )]
 
+#[macro_use]
+extern crate derive_builder;
+
 mod cmd;
 mod models;
 

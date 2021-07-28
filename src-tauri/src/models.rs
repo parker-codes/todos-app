@@ -67,24 +67,36 @@ impl AppData {
   }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
 pub struct Todo {
+  #[builder(setter(skip), default = "Uuid::new_v4().to_string()")]
   id: String,
+
+  #[builder(setter(skip), default = "Utc::now()")]
   created_at: DateTime<Utc>,
+
+  /// The user-defined task to perform.
   title: String,
+
+  #[builder(default = "false")]
+  /// Whether the user has completed the task or not.
   completed: bool,
+
+  /// The task's sort index.
+  index: u32,
 }
 
-impl Todo {
-  pub fn new_with_title(title: String) -> Self {
-    let id = Uuid::new_v4().to_string();
-    let created_at = Utc::now();
+// impl Todo {
+//   pub fn new_with_title(title: String) -> Self {
+//     let id = Uuid::new_v4().to_string();
+//     let created_at = Utc::now();
 
-    Todo {
-      id,
-      created_at,
-      title,
-      completed: false,
-    }
-  }
-}
+//     Todo {
+//       id,
+//       created_at,
+//       title,
+//       completed: false,
+//       index: 0.0,
+//     }
+//   }
+// }
