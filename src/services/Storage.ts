@@ -6,8 +6,8 @@ async function all(): Promise<Todo[]> {
   return JSON.parse(all);
 }
 
-async function create(title: string): Promise<Todo> {
-  const todo: string = await invoke('create_todo', { title });
+async function create(title: string, index: number): Promise<Todo> {
+  const todo: string = await invoke('create_todo', { title, index });
   return JSON.parse(todo);
 }
 

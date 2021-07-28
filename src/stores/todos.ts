@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 import Storage from '../services/Storage';
 import type { Todo, NewTodo, ExistingTodo } from '../models/Todo';
 
@@ -10,7 +10,8 @@ export async function init(): Promise<void> {
 }
 
 export async function add({ detail }: CustomEvent<NewTodo>): Promise<void> {
-  const newTodo: Todo = await Storage.create(detail.title);
+  const nextIndex = get(todos).length;
+  const newTodo: Todo = await Storage.create(detail.title, nextIndex);
 
   todos.update(($todos) => {
     return [...$todos, newTodo];
