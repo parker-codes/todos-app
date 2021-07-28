@@ -1,4 +1,4 @@
-use crate::models::{AppData, Todo};
+use crate::models::{AppData, Todo, TodoBuilder};
 use tauri::{command, AppHandle};
 
 #[command]
@@ -10,8 +10,8 @@ pub fn get_all_todos(app: AppHandle) -> Result<String, String> {
 }
 
 #[command]
-pub fn create_todo(app: AppHandle, title: String) -> Result<String, String> {
-  let todo = Todo::new_with_title(title);
+pub fn create_todo(app: AppHandle, title: String, index: u32) -> Result<String, String> {
+  let todo = TodoBuilder::default().title(title).index(index).build().unwrap();
   AppData::new(app.path_resolver().app_dir()).create_todo(&todo);
 
   let serialized = serde_json::to_string(&todo).expect("Can't serialize new todo to JSON");
