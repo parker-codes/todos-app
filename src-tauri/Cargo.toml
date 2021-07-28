@@ -21,6 +21,7 @@ tauri = { git = "https://github.com/tauri-apps/tauri", branch = "dev", features 
 uuid = "0.8.2"
 chrono = { version = "0.4.19", features = ["serde"] }
 jfs = "0.6.2"
+derive_builder = "0.10.2"
 
 [features]
 default = [ "custom-protocol" ]
