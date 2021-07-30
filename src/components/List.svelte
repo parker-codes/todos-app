@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { dndzone } from 'svelte-dnd-action';
+  import { flip } from 'svelte/animate';
   import type { Todo } from '../models/Todo';
 
   import CheckboxIcon from './icons/CheckboxIcon.svelte';
@@ -9,12 +10,26 @@
   export let items: Todo[];
 
   const dispatch = createEventDispatcher();
+
+  const flipDurationMs = 200;
+
+  function handleDrag(event) {
+    items = event.detail.items;
+  }
+  function handleDrop(event) {
+    items = event.detail.items;
+  }
 </script>
 
-<div class="m-4 text-gray-900">
+<div
+  class="m-4 text-gray-900"
+  use:dndzone={{ items, flipDurationMs }}
+  on:consider={handleDrag}
+  on:finalize={handleDrop}
+>
   {#each items as todo (todo.id)}
     <div
-      transition:slide
+      animate:flip={{ duration: flipDurationMs }}
       class="mb-2 w-full flex justify-between {todo.completed ? 'line-through text-gray-700' : ''}"
     >
       <div class="flex items-center justify-start flex-shrink-0 mr-2">
