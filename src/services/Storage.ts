@@ -26,6 +26,7 @@ export default {
   remove
 };
 
+// TODO: remove this when type=module error is fixed
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function invoke(cmd: string, args?: InvokeArgs): Promise<any> {
   const { invoke: tauri_invoke } = await import('@tauri-apps/api/tauri');
