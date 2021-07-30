@@ -15,7 +15,10 @@ impl AppData {
   }
 
   fn get_store(&self) -> Store {
-    let app_dir_path = self.app_dir.as_ref().expect("Couldn't determine app directory");
+    let app_dir_path = self
+      .app_dir
+      .as_ref()
+      .expect("Couldn't determine app directory");
 
     if !app_dir_path.exists() {
       std::fs::create_dir(&app_dir_path).expect("Couldn't create app directory");
@@ -31,7 +34,13 @@ impl AppData {
       cfg.indent = 4;
     }
 
-    Store::new_with_cfg(&path, cfg).expect("Couldn't initialize store")
+    let store = Store::new_with_cfg(&path, cfg).expect("Couldn't initialize store");
+
+    if cfg!(debug_assertions) {
+      println!("Storage path: {}", &store.path().display());
+    }
+
+    store
   }
 
   pub fn get_todos(&self) -> Vec<Todo> {
