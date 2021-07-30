@@ -19,6 +19,13 @@ function remove(id: string): Promise<boolean> {
   return invoke('remove_todo', { id });
 }
 
+export function log(event: string, payload: unknown = undefined): void {
+  console.log(event, payload);
+
+  payload = (typeof payload === 'string') ? payload : JSON.stringify(payload);
+  invoke('log', { event, payload });
+}
+
 export default {
   all,
   create,

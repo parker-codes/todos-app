@@ -11,7 +11,11 @@ pub fn get_all_todos(app: AppHandle) -> Result<String, String> {
 
 #[command]
 pub fn create_todo(app: AppHandle, title: String, index: u32) -> Result<String, String> {
-  let todo = TodoBuilder::default().title(title).index(index).build().unwrap();
+  let todo = TodoBuilder::default()
+    .title(title)
+    .index(index)
+    .build()
+    .unwrap();
   AppData::new(app.path_resolver().app_dir()).create_todo(&todo);
 
   let serialized = serde_json::to_string(&todo).expect("Can't serialize new todo to JSON");
@@ -28,4 +32,13 @@ pub fn update_todo(app: AppHandle, todo: Todo) -> Result<(), String> {
 pub fn remove_todo(app: AppHandle, id: String) -> Result<(), String> {
   AppData::new(app.path_resolver().app_dir()).remove_todo(id);
   Ok(())
+}
+
+#[command]
+pub fn log(event: String, payload: Option<String>) {
+  if let Some(payload) = payload {
+    println!("{}: {:?}", event, payload);
+  } else {
+    println!("{}", event);
+  }
 }

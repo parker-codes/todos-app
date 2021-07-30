@@ -3,6 +3,7 @@
   import { dndzone } from 'svelte-dnd-action';
   import { flip } from 'svelte/animate';
   import type { Todo } from '../models/Todo';
+  import { log } from '../services/Storage';
 
   import CheckboxIcon from './icons/CheckboxIcon.svelte';
   import TrashIcon from './icons/TrashIcon.svelte';
@@ -16,8 +17,10 @@
   function handleDrag(event) {
     items = event.detail.items;
   }
+
   function handleDrop(event) {
     items = event.detail.items;
+    log('itemes', items);
   }
 </script>
 

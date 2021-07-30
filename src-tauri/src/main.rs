@@ -15,7 +15,8 @@ fn main() {
       cmd::get_all_todos,
       cmd::create_todo,
       cmd::update_todo,
-      cmd::remove_todo
+      cmd::remove_todo,
+      cmd::log
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
