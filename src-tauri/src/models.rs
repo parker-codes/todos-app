@@ -85,18 +85,3 @@ pub struct Todo {
   /// The task's sort index.
   index: u32,
 }
-
-// impl Todo {
-//   pub fn new_with_title(title: String) -> Self {
-//     let id = Uuid::new_v4().to_string();
-//     let created_at = Utc::now();
-
-//     Todo {
-//       id,
-//       created_at,
-//       title,
-//       completed: false,
-//       index: 0.0,
-//     }
-//   }
-// }
